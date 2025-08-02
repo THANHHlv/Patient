@@ -1,0 +1,30 @@
+- name: Deploy FastAPI Patient App via Docker
+  hosts: webservers
+  become: true
+
+  task:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Create project
+      file: /opt/patient-management
+      state: directory
+
+    - name: Copy source code
+      copy:
+        src: ../
+        dest: /opt/patient-management
+        remote_src: no
+
+    - name: Run docker compose
+      shell: |
+        cd /opt/patient-management
+        docker-compose up -d --build
