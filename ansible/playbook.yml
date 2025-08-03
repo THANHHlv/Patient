@@ -2,7 +2,7 @@
   hosts: webservers
   become: true
 
-  task:
+  tasks:
     - name: Install Docker
       apt:
         name: docker.io
@@ -15,8 +15,8 @@
         state: present
 
     - name: Create project
-      file: 
-        path: /opt/patient
+      file:
+        path:  /opt/patient
         state: directory
 
     - name: Copy source code
@@ -29,3 +29,13 @@
       shell: |
         cd /opt/patient
         docker-compose up -d --build
+- name: Open Web Browser on Localhost
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Open browser to http://localhost:8000
+      shell: |
+        xdg-open http://localhost:8000 || open http://localhost:8000 || start http://localhost:8000
+      ignore_errors: true
