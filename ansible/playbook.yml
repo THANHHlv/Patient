@@ -15,16 +15,17 @@
         state: present
 
     - name: Create project
-      file: /opt/patient-management
-      state: directory
+      file: 
+        path: /opt/patient
+        state: directory
 
     - name: Copy source code
       copy:
         src: ../
-        dest: /opt/patient-management
+        dest: /opt/patient
         remote_src: no
 
     - name: Run docker compose
       shell: |
-        cd /opt/patient-management
+        cd /opt/patient
         docker-compose up -d --build
