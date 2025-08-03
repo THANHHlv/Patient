@@ -2,7 +2,7 @@
 ## Cấu trúc thư mục
 
 ```
-Patient-management/
+Patient/
 ├── app/
 │   ├── main.py              
 │   ├── database.py         
@@ -46,7 +46,7 @@ docker compose version  # hoặc: docker-compose --version
 
 ```bash
 # Di chuyển vào thư mục dự án
-cd Patient-management
+cd Patient
 
 # Chạy dự án (Windows PowerShell hoặc Ubuntu terminal)
 docker compose up --build
